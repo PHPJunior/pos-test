@@ -1,0 +1,721 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "POS Test API",
+        "description": "POS Test API",
+        "contact": {
+            "name": "Nyi Nyi Lwin",
+            "email": "nyinyilwin1992@hotmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api": {},
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authenticate a user",
+                "description": "Authenticate a user",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "User credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@user.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "token"
+                                        },
+                                        "user": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cart": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get cart data",
+                "operationId": "42ef2239423e2959007975684d36f006",
+                "responses": {
+                    "200": {
+                        "description": "Cart data"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Clear cart",
+                "operationId": "9b015e7e74516b4cb908f77c16b97cb7",
+                "responses": {
+                    "200": {
+                        "description": "Cart data"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/api/cart/{product}": {
+            "put": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Update cart data",
+                "operationId": "4203945d242290354c94a829d885fe0f",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Quantity",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "qty": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "minimum": "1",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cart data"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Add product to cart",
+                "operationId": "53d15cc8e25f4ea3eee2b7bfcc98a9db",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart data"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Remove product from cart",
+                "operationId": "04c46c18bd3a064a8e5e01f4492dfb03",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart data"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories",
+                "description": "Display a listing of the resource.",
+                "operationId": "bef22248ca7a631b2895bf3ecc796b70",
+                "parameters": [
+                    {
+                        "name": "relations[]",
+                        "in": "query",
+                        "description": "Relations to include",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Category Name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "slug",
+                        "in": "query",
+                        "description": "Category Slug",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categories"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create a category",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "da83eec71d96b5e662f240f16b3dd1b7",
+                "requestBody": {
+                    "description": "Category data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Category Name"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "category-name"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Category"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/api/categories/{category}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get a category",
+                "description": "Display the specified resource.",
+                "operationId": "af7029adbe54029ce66f15a8774e33d8",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "relations[]",
+                        "in": "query",
+                        "description": "Relations to include",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create a category",
+                "description": "Update the specified resource in storage.",
+                "operationId": "f765225dd1a5e038f85dd4410d783783",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Category data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Category Name"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "category-name"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Category"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete a category",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "884838a09cdde7071ba578830e09243f",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category deleted successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all products",
+                "description": "Display a listing of the resource.",
+                "operationId": "c5f637508d0721ef2f600e29eab90259",
+                "parameters": [
+                    {
+                        "name": "relations[]",
+                        "in": "query",
+                        "description": "Relations to include",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Product Name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "slug",
+                        "in": "query",
+                        "description": "Product Slug",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Products list"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create product",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "72ad7b66999cb5f31655d34c57865271",
+                "requestBody": {
+                    "description": "Product data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Product name"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "product-name"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "example": "10"
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product data"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{product}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get product data",
+                "description": "Display the specified resource.",
+                "operationId": "34fd841cd7970ce2f77c1476ae162ab2",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "relations[]",
+                        "in": "query",
+                        "description": "Relations to include",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product data"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update product data",
+                "description": "Update the specified resource in storage.",
+                "operationId": "0fcd271751dd236e4fe3a0733015272e",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Product data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Product name"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "product-name"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "example": "10"
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product data"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete a product",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "2889b35eaba0dd25dacecfacc8ad9e13",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product deleted successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "token": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
