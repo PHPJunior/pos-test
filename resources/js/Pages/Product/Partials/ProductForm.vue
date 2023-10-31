@@ -4,7 +4,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
 import {ref} from "vue";
-import {useAxios} from "@/composables/axios.js";
+import {useAxios} from "@/Composables/axios.js";
 import InputSelect from "@/Components/InputSelect.vue";
 
 const props = defineProps({

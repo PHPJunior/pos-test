@@ -2,7 +2,7 @@
 import {Head} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import ButtonLink from "@/Components/ButtonLink.vue";
-import { useData } from '@/composables/data.js'
+import { useData } from '@/Composables/data.js'
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Link } from '@inertiajs/vue3';
 import {ArrowDownIcon, ArrowUpIcon} from "@heroicons/vue/24/solid/index.js";
