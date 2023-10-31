@@ -70,4 +70,12 @@ class CategoryService
     {
         return $this->categoryRepository->findBySlug($slug, $relations);
     }
+
+    /**
+     * @return mixed
+     */
+    public function all(): mixed
+    {
+        return $this->categoryRepository->all();
+    }
 }

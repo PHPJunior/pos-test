@@ -17,7 +17,6 @@ class Product extends Model
         'slug',
         'price',
         'category_id',
-        'is_active',
     ];
 
     protected static function newFactory(): ProductFactory

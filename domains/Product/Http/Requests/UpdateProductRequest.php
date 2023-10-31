@@ -13,7 +13,7 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->hasPermissionTo('update products');
+        return auth()->user()->hasPermissionTo('manage products');
     }
 
     /**
@@ -27,7 +27,6 @@ class UpdateProductRequest extends FormRequest
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:products,slug,' . $this->product->id,
             'price' => 'required|numeric',
-            'is_active' => 'required|boolean',
             'category_id' => 'required|exists:categories,id',
         ];
     }

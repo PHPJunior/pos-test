@@ -3,18 +3,27 @@
 namespace Domain\Product\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Domain\Category\Services\CategoryService;
 use Domain\Product\Http\Requests\StoreProductRequest;
 use Domain\Product\Http\Requests\UpdateProductRequest;
 use Domain\Product\Models\Product;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
     /**
+     * @param CategoryService $categoryService
+     */
+    public function __construct(private CategoryService $categoryService)
+    {
+    }
+
+    /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
-        //
+        return Inertia::render('Product/Index');
     }
 
     /**
@@ -22,7 +31,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = $this->categoryService->all();
+        return Inertia::render('Product/Create', compact('categories'));
     }
 
     /**
@@ -38,6 +48,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = $this->categoryService->all();
+        return Inertia::render('Product/Edit', compact('product', 'categories'));
     }
 }

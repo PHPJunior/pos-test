@@ -14,7 +14,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->hasPermissionTo('update categories');
+        return auth()->user()->hasPermissionTo('manage categories');
     }
 
     /**

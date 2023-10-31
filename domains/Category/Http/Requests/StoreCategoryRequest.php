@@ -14,7 +14,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->hasPermissionTo('create categories');
+        return auth()->user()->hasPermissionTo('manage categories');
     }
 
     /**

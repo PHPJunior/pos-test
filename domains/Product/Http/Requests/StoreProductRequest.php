@@ -13,7 +13,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->hasPermissionTo('create products');
+        return auth()->user()->hasPermissionTo('manage products');
     }
 
     /**
@@ -27,7 +27,6 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:products',
             'price' => 'required|numeric',
-            'is_active' => 'required|boolean',
             'category_id' => 'required|exists:categories,id',
         ];
     }

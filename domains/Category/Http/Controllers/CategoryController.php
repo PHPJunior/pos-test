@@ -4,6 +4,7 @@ namespace Domain\Category\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Domain\Category\Models\Category;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
@@ -12,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Category/Index');
     }
 
     /**
@@ -20,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Category/Create');
     }
 
     /**
@@ -34,8 +35,8 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Category $category): \Inertia\Response
     {
-        //
+        return Inertia::render('Category/Edit', compact('category'));
     }
 }

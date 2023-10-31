@@ -17,4 +17,6 @@ interface RepositoryInterface
     public function update(int $id, array $data): mixed;
 
     public function delete(int $id): mixed;
+
+    public function all(): mixed;
 }

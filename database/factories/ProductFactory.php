@@ -22,8 +22,7 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->name(),
             'slug' => fake()->slug(),
-            'price' => fake()->numberBetween(100, 200),
-            'is_active' => fake()->boolean()
+            'price' => fake()->numberBetween(100, 200)
         ];
     }
 }

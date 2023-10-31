@@ -18,18 +18,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'create products',
-            'view products',
-            'update products',
-            'delete products',
-            'create categories',
-            'view categories',
-            'update categories',
-            'delete categories',
-            'create users',
-            'view users',
-            'update users',
-            'delete users',
+            'manage products',
+            'manage categories',
+            'manage users'
         ];
 
         foreach ($permissions as $permission) {
@@ -48,7 +39,7 @@ class DatabaseSeeder extends Seeder
         $user->givePermissionTo($permissions);
 
         Category::factory(10)
-            ->has(Product::factory()->count(10))
+            ->has(Product::factory()->count(10), 'products')
             ->create();
     }
 }

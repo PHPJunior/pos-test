@@ -25,8 +25,6 @@ return new class extends Migration
 
             $table->bigInteger('price');
 
-            $table->boolean('is_active')->default(true);
-
             $table->timestamps();
         });
     }

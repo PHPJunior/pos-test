@@ -30,15 +30,25 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $permissions = !$request->user() ? [] : [
+            'can' => [
+                'manage_products' => $request->user()->can('manage products'),
+                'manage_categories' => $request->user()->can('manage categories'),
+                'manage_users' => $request->user()->can('manage users'),
+            ]
+        ] ;
+
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'token' => $request->session()->get('token'),
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            ...$permissions
         ];
     }
 }
