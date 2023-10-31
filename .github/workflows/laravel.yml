@@ -36,7 +36,10 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test
+
+
   deploy:
+    needs: laravel-tests
     name: deploy to production
     runs-on: ubuntu-20.04
     steps:
@@ -46,6 +49,6 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
       - name: connect and pull
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git pull && npm install && npm run build && composer install && php artisan migrate --force && exit"
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git pull && composer install && php artisan migrate --force && exit"
       - name: cleanup
         run: rm -rf ~/.ssh
