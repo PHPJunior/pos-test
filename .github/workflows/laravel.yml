@@ -8,9 +8,7 @@ on:
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-20.04
-
     steps:
     - uses: shivammathur/setup-php@v2
       with:
@@ -38,3 +36,16 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test
+  deploy:
+    name: deploy to production
+    runs-on: ubuntu-20.04
+    steps:
+      - name: install ssh keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+      - name: connect and pull
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git pull && npm install && npm run build && composer install && php artisan migrate --force && exit"
+      - name: cleanup
+        run: rm -rf ~/.ssh
